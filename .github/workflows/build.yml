@@ -23,7 +23,7 @@ jobs:
           gradle-version: '8.11.1'
 
       - name: Decompresser le projet
-        run: unzip -o DualAudio-Android-v0.3.zip
+        run: .DualAudio-Android-v0.3.1.zip
       - name: Compiler l APK
         run: |
           cd DualAudio
