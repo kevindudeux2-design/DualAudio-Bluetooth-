@@ -17,19 +17,28 @@ jobs:
           distribution: temurin
           java-version: '17'
 
+      - name: Installer unzip
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y unzip
+
       - name: Installer Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.11.1'
 
+      - name: Verifier Gradle
+        run: gradle --version
+
       - name: Decompresser le projet
-        run: .DualAudio-Android-v0.3.1.zip
-      - name: Compiler l APK
+        run: unzip -o DualAudio-Android-v0.3.1.zip
+
+      - name: Compiler APK
         run: |
           cd DualAudio
-          gradle assembleDebug
+          gradle assembleDebug --stacktrace
 
-      - name: Recuperer l APK
+      - name: Recuperer APK
         uses: actions/upload-artifact@v4
         with:
           name: DualAudio-APK
